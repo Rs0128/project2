@@ -4,16 +4,28 @@ using UnityEngine;
 
 public class MoveLeft : MonoBehaviour
 {
-    private float speed = 30;
+    [SerializeField] float speed = 30; //Groundが動く速さ
+    PlayerController playerControllerScript;
+    float leftBound = -15; //左の限界値
+
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.left * Time.deltaTime * speed);
+
+        //ゲームオーバー状態でなければ、backgroundを動かす
+        if(playerControllerScript.gameOver == false)
+        {
+            transform.Translate(Vector3.left * Time.deltaTime * speed);
+        }
+        //左の限界値よりも左に行ってしまったら、かつ、左に行き過ぎたのが障害物のタグなら
+        if (transform.position.x < leftBound　&& gameObject.CompareTag("Obstacle")) 
+        {
+            Destroy(gameObject);//障害物は消してしまう
+        }
     }
 }
