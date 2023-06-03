@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoveLeft : MonoBehaviour
 {
-    [SerializeField] float speed = 30; //Ground‚ª“®‚­‘¬‚³
+    [SerializeField] float speed = 15; //Ground‚ª“®‚­‘¬‚³
     PlayerController playerControllerScript;
     float leftBound = -15; //¶‚ÌŒÀŠE’l
 

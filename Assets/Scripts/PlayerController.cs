@@ -11,6 +11,8 @@ public class PlayerController: MonoBehaviour
     Rigidbody rb;
     Animator playerAnim;
 
+    [SerializeField] ParticleSystem explosionParticle;
+    [SerializeField] ParticleSystem DirtParticle;
     void Start()
     {
        rb = GetComponent<Rigidbody>();
@@ -37,8 +39,11 @@ public class PlayerController: MonoBehaviour
         {
             isOnGround = true;　　//地面についている状態に変更
         }
-        else if (collision.gameObject.CompareTag("Obstacle"))
+        else if (collision.gameObject.CompareTag("Obstacle"))//障害物にぶつかったら
         {
+            explosionParticle.Play();//爆発
+            DirtParticle.Stop();
+
             gameOver = true; 
             playerAnim.SetBool("Death_b", true);  //ここで死亡状態bにする（Death_bの名前は本来自分で定義できる）
             playerAnim.SetInteger("DeathType_int", 1);　　//integerは整数の意味。死亡のタイプ？を一番上にする的な
